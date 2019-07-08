@@ -7,12 +7,13 @@ package eventmanagement;
 
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,6 +27,7 @@ public class Homepage extends javax.swing.JFrame {
      */
     public Homepage() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -48,12 +50,12 @@ public class Homepage extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextFieldNO = new javax.swing.JTextField();
-        jCheckBox_Photography = new javax.swing.JCheckBox();
-        jCheckBox_decoration = new javax.swing.JCheckBox();
-        jCheckBox_catering = new javax.swing.JCheckBox();
-        jCheckBox_sound = new javax.swing.JCheckBox();
         Continue = new javax.swing.JButton();
         jComboBox_eventname = new javax.swing.JComboBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
         jDateChooser_eventdate = new com.toedter.calendar.JDateChooser();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -101,44 +103,16 @@ public class Homepage extends javax.swing.JFrame {
         jLabel5.setText("Additional Services:");
 
         jTextFieldNO.setBackground(new java.awt.Color(52, 73, 94));
+        jTextFieldNO.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextFieldNO.setForeground(new java.awt.Color(255, 255, 255));
         jTextFieldNO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNOActionPerformed(evt);
             }
         });
 
-        jCheckBox_Photography.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jCheckBox_Photography.setText("Photography");
-        jCheckBox_Photography.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_PhotographyActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_decoration.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jCheckBox_decoration.setText("Decoration");
-        jCheckBox_decoration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_decorationActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_catering.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jCheckBox_catering.setText("Catering");
-        jCheckBox_catering.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_cateringActionPerformed(evt);
-            }
-        });
-
-        jCheckBox_sound.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jCheckBox_sound.setText("Sound");
-        jCheckBox_sound.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox_soundActionPerformed(evt);
-            }
-        });
-
+        Continue.setBackground(new java.awt.Color(46, 204, 113));
+        Continue.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         Continue.setText("Continue");
         Continue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +120,7 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        jComboBox_eventname.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jComboBox_eventname.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wedding Function", "Birthday Function", "Get Together", "Copprate Party" }));
         jComboBox_eventname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,78 +128,95 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCheckBox2.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox2.setText(" Photograghy");
+
+        jCheckBox3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCheckBox3.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox3.setText(" Sounds");
+
+        jCheckBox4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCheckBox4.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox4.setText(" Decoration");
+
+        jCheckBox5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jCheckBox5.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox5.setText(" Catering");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(69, 69, 69)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jCheckBox_Photography, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBox_decoration, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jCheckBox_catering, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBox_sound, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                                        .addComponent(Continue))))
+                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldNO)
-                                    .addComponent(jDateChooser_eventdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox_eventname, 0, 121, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(29, 29, 29))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(189, 189, 189)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldNO, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jDateChooser_eventdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jComboBox_eventname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(10, 10, 10))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addGap(105, 105, 105))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Continue, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox_eventname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jDateChooser_eventdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextFieldNO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jCheckBox_Photography)
-                    .addComponent(jCheckBox_decoration))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox_catering)
-                            .addComponent(jCheckBox_sound))
-                        .addContainerGap(34, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Continue)
-                        .addGap(27, 27, 27))))
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox4))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox5)
+                    .addComponent(jCheckBox3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(Continue, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,22 +237,6 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNOActionPerformed
 
-    private void jCheckBox_PhotographyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_PhotographyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_PhotographyActionPerformed
-
-    private void jCheckBox_decorationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_decorationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_decorationActionPerformed
-
-    private void jCheckBox_cateringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_cateringActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_cateringActionPerformed
-
-    private void jCheckBox_soundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_soundActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox_soundActionPerformed
-
     private void jComboBox_eventnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_eventnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_eventnameActionPerformed
@@ -276,56 +252,87 @@ public class Homepage extends javax.swing.JFrame {
         
         int NoOfParticipants = Integer.parseInt(jTextFieldNO.getText());
          
-         CheckboxGroup service = new CheckboxGroup();
-         Checkbox jCheckBox_Photography = new Checkbox("Photography", false, service);
-         Checkbox jCheckBox_decoration = new Checkbox("Decoration", false, service);
-         Checkbox jCheckBox_catering = new Checkbox("Catering", false, service);
-         Checkbox jCheckBox_sound = new Checkbox("Sound", false, service);
+        int photography = 0;
+        int decoration = 0;
+        int catering = 0;
+        int sounds = 0;
+        
+        if (jCheckBox5.isSelected()) {
+         
+           catering = 1; 
+           
+        }
+        
+        if(jCheckBox2.isSelected()) {
+        
+           photography = 1;  
+           
+        }
+        if (jCheckBox3.isSelected()) {
+         
+           sounds = 1;  
+        }
+        
+        
+        if (jCheckBox4.isSelected()) {
+         
+           decoration = 1;  
+        }
+        
+         
         
          
          //boolean checked = jCheckBox_Photography.getState();
          
-        if(jCheckBox_Photography.getState()) {
-        
-           String ser1 = "Photography";         
-        }
-        else if (jCheckBox_decoration.getState()) {
-    //     
-           String ser2 = "Decoration";  
-        }
-        
-        else if (jCheckBox_catering.getState()) {
-    //     
-           String ser3 = "Catering";  
-        }
-        else if (jCheckBox_sound.getState()) {
-    //     
-           String ser4 = "Sound";  
-        }
          
+        int event_cost = 0;
+        PreparedStatement st1,st2,st3;
+        ResultSet rs;
+        String query1 = "INSERT INTO `event_details`(`event_name`, `event_date`, `no_of_participants`, `event_cost`) VALUES (?,?,?,?)";
+        String query2 = "SELECT * FROM  event_details ORDER BY event_id DESC LIMIT 1";
         
-        PreparedStatement st;
-        String query = "INSERT INTO `event_details`(`event_name`, `event_date`, `no_of_participants`) VALUES (?,?,?)";
         
         try{
-            st= MyConnection.getConnection().prepareStatement(query); 
+            st1= MyConnection.getConnection().prepareStatement(query1); 
             
-            st.setString(1,eventname);
-            st.setString(2,eventdate);
-            st.setInt(3,NoOfParticipants );
+            st1.setString(1,eventname);
+            st1.setString(2,eventdate);
+            st1.setInt(3,NoOfParticipants);
+            st1.setInt(4,event_cost);
+            
+            st1.execute();
+            
+            st2= MyConnection.getConnection().prepareStatement(query2);
+            rs = st2.executeQuery();
+            
+            rs.next();
+            int id = rs.getInt("event_id");
+            
+            String query3 = "INSERT INTO events(`id`, `photography`, `sounds`, `catering`, `decoration`) VALUES (?,?,?,?,?)";
+            st3= MyConnection.getConnection().prepareStatement(query3); 
+            
+            st3.setInt(1,id);
+            st3.setInt(2,photography);
+            st3.setInt(3,sounds);
+            st3.setInt(4,catering);
+            st3.setInt(5,decoration);
+            
+            st3.execute();
       
-            if(st.executeUpdate() > 0)
-           {
-                JOptionPane.showMessageDialog(null,"New User Add");
-            }
+           
              
         }catch(SQLException ex){
             Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE,null,ex);
         }
         
         
-         
-        
+        Summary sum = new  Summary();
+        sum.setVisible(true);
+        sum.pack();
+        sum.setLocationRelativeTo(null);
+        sum.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+          
     }//GEN-LAST:event_ContinueActionPerformed
 
     /**
@@ -366,10 +373,10 @@ public class Homepage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Continue;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox_Photography;
-    private javax.swing.JCheckBox jCheckBox_catering;
-    private javax.swing.JCheckBox jCheckBox_decoration;
-    private javax.swing.JCheckBox jCheckBox_sound;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox_eventname;
     private com.toedter.calendar.JDateChooser jDateChooser_eventdate;

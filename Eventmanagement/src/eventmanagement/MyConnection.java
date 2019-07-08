@@ -6,6 +6,8 @@
 package eventmanagement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -23,7 +25,7 @@ public static Connection getConnection(){
             Class.forName("com.mysql.cj.jdbc.Driver"); 
             con = DriverManager.getConnection("jdbc:mysql://localhost/event_management_system","root","");
         }catch(Exception ex){
-            System.out.println(ex.getMessage());
+            Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE,null,ex);
         }      
         return con;
     }    
